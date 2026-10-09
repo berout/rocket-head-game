@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Unik! – kosmiczna gra sterowana głową</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -92,6 +92,7 @@ canvas.full{position:absolute;inset:0;width:100%;height:100%;display:block}
 .uk-sens span{font:600 11px var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:0 10px}
 .uk-sens button{border:0;background:transparent;color:var(--muted);font:500 13px var(--ui);padding:7px 14px;border-radius:999px;cursor:pointer}
 .uk-sens button.on{background:var(--fg);color:#121216}
+.uk-sens i{font-style:normal}.uk-sens i.s{display:none}
 /* ---------- 6. catch game ---------- */
 .ct-hud{position:absolute;top:82px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:3}
 .ct-hud>div{min-width:112px;padding:9px 16px 10px;border-radius:16px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);text-align:center;transition:border-color .2s,box-shadow .2s}
@@ -129,6 +130,57 @@ canvas.full{position:absolute;inset:0;width:100%;height:100%;display:block}
   background:radial-gradient(circle,#fff 0 4px,rgba(255,255,255,.22) 5px 15px,transparent 16px),conic-gradient(var(--mint) calc(var(--p,0) * 1turn),rgba(255,255,255,.35) 0);
   -webkit-mask:radial-gradient(circle,#000 0 16px,transparent 17px 21px,#000 22px 26px,transparent 27px);mask:radial-gradient(circle,#000 0 16px,transparent 17px 21px,#000 22px 26px,transparent 27px);
   filter:drop-shadow(0 0 8px rgba(0,0,0,.5))}
+
+/* ---------- instrukcja zwijana ---------- */
+body:not(.hint-open) #hint{display:none}
+body.hint-open .hint-btn{display:none}
+#hint{padding-right:48px}
+.hint-x{position:absolute;top:8px;right:8px;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--fg);font:500 18px/1 var(--ui);cursor:pointer;display:grid;place-items:center}
+.hint-btn{position:fixed;left:16px;bottom:16px;z-index:26;height:40px;padding:0 16px 0 12px;border-radius:999px;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:var(--fg);font:600 13px var(--ui);display:flex;align-items:center;gap:8px;cursor:pointer}
+.hint-btn b{width:22px;height:22px;border-radius:50%;background:var(--fg);color:#121216;display:grid;place-items:center;font:800 13px var(--ui)}
+
+/* ---------- telefon ---------- */
+@media (max-width:760px), (max-height:520px) and (pointer:coarse){
+  html,body{height:100%;overscroll-behavior:none}
+  #topbar{display:none}
+  .ct-hud{top:calc(env(safe-area-inset-top) + 8px);left:8px;right:8px;transform:none;gap:6px;justify-content:center}
+  .ct-hud>div{flex:1 1 0;min-width:0;max-width:120px;padding:6px 4px 7px;border-radius:12px}
+  .ct-hud small{font-size:8.5px;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ct-hud b{font-size:20px}
+  .ct-lives{height:24px;gap:2px}
+  .ct-lives i{width:12px;height:12px}
+  .ct-prog{margin-top:4px}
+  .ct-msg{top:26%;width:92vw}
+  .ct-title{font-size:clamp(40px,13vw,76px)}
+  .ct-sub{font-size:14px;margin-top:10px}
+  .ct-diff{top:64%;width:calc(100vw - 16px);gap:8px;justify-content:center}
+  .ct-dbtn{flex:1 1 0;min-width:0;width:auto;max-width:180px;padding:14px 6px 18px;border-radius:18px;gap:4px}
+  .ct-dbtn b{font-size:clamp(17px,5.4vw,24px)}
+  .ct-dbtn span{font-size:11px}
+  .ct-dbtn small{display:none}
+  .ct-hold{font-size:11px;min-height:14px}
+  .ct-dbtn .ring{left:10px;right:10px;bottom:8px}
+  .uk-sens{top:calc(64% + 74px);max-width:calc(100vw - 16px);gap:2px;padding:4px}
+  .uk-sens span{font-size:9.5px;padding:0 6px;letter-spacing:.06em}
+  .uk-sens i.l{display:none}.uk-sens i.s{display:inline}
+  .uk-sens button{font-size:12px;padding:6px 10px}
+  #preview{width:84px;height:112px;right:10px;bottom:calc(env(safe-area-inset-bottom) + 10px);border-radius:12px}
+  #hint{z-index:27;left:10px;right:10px;transform:none;max-width:none;min-width:0;bottom:calc(env(safe-area-inset-bottom) + 10px);max-height:45vh;overflow:auto;font-size:13px;align-items:flex-start;flex-direction:column;gap:8px}
+  .hint-btn{left:10px;bottom:calc(env(safe-area-inset-bottom) + 10px)}
+  #start{place-items:start center;padding:calc(env(safe-area-inset-top) + 28px) 18px 28px}
+  .start-card h1{font-size:clamp(52px,17vw,96px)}
+  .lead{font-size:16px;margin-bottom:20px}
+  .start-list{grid-template-columns:1fr;gap:8px;margin-bottom:24px}
+  .cta{width:100%;justify-content:center}
+}
+@media (max-height:520px) and (pointer:coarse){ /* telefon poziomo */
+  .ct-msg{top:34%}
+  .ct-title{font-size:clamp(36px,9vh,60px)}
+  .ct-diff{top:66%}
+  .ct-dbtn{padding:10px 6px 14px;max-width:150px}
+  .uk-sens{top:calc(66% + 70px)}
+  #preview{width:100px;height:75px}
+}
 </style>
 </head>
 <body>
@@ -146,7 +198,8 @@ canvas.full{position:absolute;inset:0;width:100%;height:100%;display:block}
 
 <main id="stage"></main>
 
-<div id="hint"><span class="hint-text"></span><span class="hint-extra"></span></div>
+<div id="hint"><span class="hint-text"></span><span class="hint-extra"></span><button class="hint-x" aria-label="Zamknij instrukcję">×</button></div>
+<button class="hint-btn" id="hintToggle" aria-label="Jak grać"><b>?</b>Jak grać</button>
 <div id="preview"><canvas id="pv"></canvas></div>
 
 <section id="start">
@@ -215,6 +268,13 @@ class OneEuro2D {
   constructor(...a) { this.fx = new OneEuro(...a); this.fy = new OneEuro(...a); }
   filter(p, t) { return { x: this.fx.filter(p.x, t), y: this.fy.filter(p.y, t) }; }
   reset() { this.fx.reset(); this.fy.reset(); }
+}
+
+if (typeof CanvasRenderingContext2D !== 'undefined' && !CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+    r = Math.min(typeof r === 'number' ? r : 0, w / 2, h / 2);
+    this.moveTo(x + r, y); this.arcTo(x + w, y, x + w, y + h, r); this.arcTo(x + w, y + h, x, y + h, r); this.arcTo(x, y + h, x, y, r); this.arcTo(x, y, x + w, y, r); this.closePath();
+  };
 }
 
 // ---------- app state ----------
@@ -374,8 +434,8 @@ const POSE_CONN = [[11,12],[11,13],[13,15],[12,14],[14,16],[11,23],[12,24],[23,2
 const pvCtx = ui.pv.getContext('2d');
 function drawPreview(sc, data) {
   if (!app.showPreview) return;
-  const c = ui.pv, pw = 208, ph = 156, d = app.dpr;
-  if (c.width !== pw * d) { c.width = pw * d; c.height = ph * d; }
+  const c = ui.pv, pw = ui.preview.clientWidth || 208, ph = ui.preview.clientHeight || 156, d = app.dpr;
+  if (c.width !== Math.round(pw * d) || c.height !== Math.round(ph * d)) { c.width = Math.round(pw * d); c.height = Math.round(ph * d); }
   const ctx = pvCtx; ctx.setTransform(d, 0, 0, d, 0, 0);
   ctx.fillStyle = '#111'; ctx.fillRect(0, 0, pw, ph);
   drawVideoCover(ctx, pw, ph);
@@ -424,6 +484,7 @@ function loop(now) {
   requestAnimationFrame(loop);
   const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
   const sc = app.scenes[app.current];
+  const vv = app.video; if (app.camReady && vv.videoWidth && (vv.videoWidth !== app.vw || vv.videoHeight !== app.vh)) { app.vw = vv.videoWidth; app.vh = vv.videoHeight; }
   let data = null;
   if (app.fake) {
     data = app.fake(sc.id, now) || null;
@@ -440,7 +501,20 @@ function loop(now) {
   if (app.fpsOn) { fpsAcc += dt; fpsN++; if (fpsAcc > 0.5) { ui.fps.textContent = `${Math.round(fpsN / fpsAcc)} fps · detekcja ${Math.round(detN / fpsAcc)}/s`; fpsAcc = 0; fpsN = 0; detN = 0; } } else detN = 0;
 }
 
+// instrukcja: na telefonie zwinięta do przycisku „?”, na komputerze rozwinięta
+const MOBILE_Q = '(max-width: 760px), (max-height: 520px) and (pointer: coarse)';
+app.mobile = matchMedia(MOBILE_Q).matches;
+app.setHintOpen = (on) => { document.body.classList.toggle('hint-open', !!on); };
+function initHintToggle() {
+  const btn = $('#hintToggle'), x = $('#hint .hint-x');
+  if (!btn) { document.body.classList.add('hint-open'); return; }
+  app.setHintOpen(!app.mobile);
+  btn.onclick = () => app.setHintOpen(true);
+  if (x) x.onclick = () => app.setHintOpen(false);
+}
+
 function boot() {
+  initHintToggle();
   app.scenes.forEach((sc, i) => {
     const t = el('button', 'tab', `<span class="k">${i + 1}</span>${sc.name}`);
     t.onclick = () => setScene(i); ui.tabs.appendChild(t);
@@ -451,7 +525,7 @@ function boot() {
   $('#startBtn').onclick = startCamera;
   $('#pvBtn').onclick = () => togglePreview();
   addEventListener('resize', () => {
-    app.W = innerWidth; app.H = innerHeight; app.dpr = Math.min(devicePixelRatio || 1, 2);
+    app.W = innerWidth; app.H = innerHeight; app.dpr = Math.min(devicePixelRatio || 1, 2); app.mobile = matchMedia(MOBILE_Q).matches;
     app.resizeHooks.forEach((f) => f());
   });
   addEventListener('keydown', (e) => {
@@ -506,7 +580,7 @@ registerScene({
       </div>
       <div class="ct-msg"><div class="ct-title"></div><div class="ct-sub"></div></div>
       <div class="ct-diff">${Object.entries(this.DIFF).map(([k, d]) => `<button class="ct-dbtn" data-k="${k}"><span class="ring"></span><b>${d.label}</b><span>${d.desc}</span><small>${d.note}</small><em class="ct-hold"></em></button>`).join('')}</div>
-      <div class="uk-sens"><span>Czułość ruchu głowy</span>${Object.entries(this.SENS).map(([k, s]) => `<button data-s="${k}">${s.label}</button>`).join('')}</div>`);
+      <div class="uk-sens"><span><i class="l">Czułość ruchu głowy</i><i class="s">Czułość</i></span>${Object.entries(this.SENS).map(([k, s]) => `<button data-s="${k}">${s.label}</button>`).join('')}</div>`);
     this.top = makeCanvas(root); this.top.c.style.zIndex = '6'; this.top.c.style.pointerEvents = 'none'; // statek nad kafelkami menu
     const q = (s) => root.querySelector(s);
     Object.assign(this, { hScore: q('.ct-score'), hLevel: q('.ct-level'), hProg: q('.ct-prog i'), hLives: q('.ct-lives'), hBest: q('.ct-best'), msg: q('.ct-msg'), mTitle: q('.ct-title'), mSub: q('.ct-sub'), diffBox: q('.ct-diff'), sensBox: q('.uk-sens') });
@@ -526,7 +600,7 @@ registerScene({
     this.setReady();
   },
 
-  newStar(anyZ) { return { X: (Math.random() - 0.5) * 7, Y: (Math.random() - 0.5) * 5, z: anyZ ? 1 + Math.random() * this.Z_FAR : this.Z_FAR }; },
+  newStar(anyZ) { const { mx, my } = this.limits(); return { X: (Math.random() - 0.5) * 2 * (mx + 2.5), Y: (Math.random() - 0.5) * 2 * (my + 2), z: anyZ ? 1 + Math.random() * this.Z_FAR : this.Z_FAR }; },
   setSens(k) { this.sens = this.SENS[k] ? k : 'mid'; this.sbtns.forEach((b) => b.classList.toggle('on', b.dataset.s === this.sens)); try { localStorage.setItem('unik-sens', this.sens); } catch (e) {} },
   setMsg(title, sub, pop) {
     this.mTitle.textContent = title; this.mSub.textContent = sub || '';
@@ -549,7 +623,7 @@ registerScene({
 
   countdown(diff) {
     const D = this.DIFF[diff]; this.diff = diff; this.sel = Object.keys(this.DIFF).indexOf(diff);
-    this.state = 'count'; this.tc = 0; this.step = -1; this.showMenu(false); this.clearDwell();
+    this.state = 'count'; this.tc = 0; this.step = -1; this.showMenu(false); this.clearDwell(); if (app.mobile) app.setHintOpen(false);
     this.objs = []; this.score = 0; this.level = D.start; this.lives = D.lives; this.maxLives = D.lives; this.passedLv = 0; this.passed = 0;
     this.spawnT = 0.8; this.heartT = 25; this.invuln = 0; this.calib = []; this.renderLives(true);
   },
@@ -571,8 +645,10 @@ registerScene({
   },
 
   // świat -> ekran (perspektywa; płaszczyzna statku to z = 1)
-  proj(X, Y, z) { const k = (app.H / 2) / z; return { x: app.W / 2 + X * k, y: app.H / 2 + Y * k, k }; },
-  limits() { return { mx: (app.W / app.H) * 0.86, my: 0.78 }; },
+  // jednostka świata = połowa KRÓTSZEGO boku ekranu, dzięki temu w pionie (telefon) skala też się zgadza
+  unit() { return Math.min(app.W, app.H) / 2; },
+  proj(X, Y, z) { const k = this.unit() / z; return { x: app.W / 2 + X * k, y: app.H / 2 + Y * k, k }; },
+  limits() { const u = this.unit(); return { mx: (app.W / 2 / u) * 0.86, my: (app.H / 2 / u) * 0.78 }; },
 
   spawn() {
     const P = this.LV(this.level), { mx, my } = this.limits(), r = Math.random();
@@ -613,7 +689,8 @@ registerScene({
       if (this.base) {
         const k = app.vw / app.vh, S = this.SENS[this.sens];
         const dx = this.fx.filter(((nose.x - this.base.x) * k) / s, t), dy = this.fy.filter((nose.y - this.base.y) / s, t);
-        this.target = { x: clamp(dx / S.rx, -1, 1) * mx, y: clamp(dy / S.ry, -1, 1) * my };
+        const menuOn = this.diffBox.classList.contains('on'); // w menu neutralna głowa = statek nad kafelkami, nie na nich
+        this.target = { x: clamp(dx / S.rx, -1, 1) * mx, y: clamp(dy / S.ry - (menuOn ? 0.3 : 0), -1, 1) * my };
       }
       // przechył głowy (linia oczu) = przechył statku
       const a = Math.atan2(lm[33].y - lm[263].y, (lm[33].x - lm[263].x) * (app.vw / app.vh));
@@ -683,8 +760,9 @@ registerScene({
     let hit = null;
     if (this.target) for (const b of this.dbtns) { const r = b.getBoundingClientRect(); if (sp.x > r.left && sp.x < r.right && sp.y > r.top && sp.y < r.bottom) { hit = b; break; } }
     const present = now - this.faceSeen < 300;
+    const settled = this.target && Math.hypot(this.ship.x - this.target.x, this.ship.y - this.target.y) < 0.08; // statek dojechał, nie jest w przelocie
     if (!this.menuArmed) {
-      if (!hit && present) this.menuArmed = true;
+      if (!hit && present && settled) this.menuArmed = true;
       this.dbtns.forEach((b) => { b.classList.toggle('wait', b === hit); b.querySelector('.ct-hold').textContent = b === hit ? 'zjedź statkiem i wróć' : ''; });
       hit = null;
     }
@@ -763,7 +841,7 @@ registerScene({
     if (menu && this.target) {
       this.drawShip(T, t, now);
       const pr = this.dwell.k && this.menuArmed ? clamp(this.dwell.t / this.HOLD, 0, 1) : 0, sp = this.proj(this.ship.x, this.ship.y, 1);
-      if (pr > 0) { T.strokeStyle = '#2fd8a6'; T.lineWidth = 5; T.lineCap = 'round'; T.beginPath(); T.arc(sp.x, sp.y, 78, -Math.PI / 2, -Math.PI / 2 + pr * Math.PI * 2); T.stroke(); }
+      if (pr > 0) { T.strokeStyle = '#2fd8a6'; T.lineWidth = 5; T.lineCap = 'round'; T.beginPath(); T.arc(sp.x, sp.y, 78 * clamp(Math.min(W, H) / 900, 0.55, 1.4), -Math.PI / 2, -Math.PI / 2 + pr * Math.PI * 2); T.stroke(); }
     }
     // efekty
     for (let i = this.rings.length - 1; i >= 0; i--) { const r = this.rings[i]; r.life -= dt; r.r += 700 * dt; if (r.life <= 0) { this.rings.splice(i, 1); continue; } ctx.strokeStyle = `rgba(255,170,90,${r.life * 2})`; ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(r.x, r.y, r.r, 0, Math.PI * 2); ctx.stroke(); }
@@ -816,7 +894,7 @@ registerScene({
   },
 
   drawShip(ctx, t, now) {
-    const p = this.proj(this.ship.x, this.ship.y, 1), s = clamp(app.H / 900, 0.7, 1.4);
+    const p = this.proj(this.ship.x, this.ship.y, 1), s = clamp(Math.min(app.W, app.H) / 900, 0.55, 1.4);
     if (this.invuln > 0 && this.state === 'play' && Math.floor(now / 90) % 2 === 0) return; // mruganie po trafieniu
     ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(this.ship.roll); ctx.scale(s, s);
     // płomienie silników
